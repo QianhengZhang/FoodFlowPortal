@@ -5,13 +5,19 @@ import pandas as pd
 import geopandas as gpd
 import pydeck as pdk
 
-# set the page to use the full width
-st.set_page_config(layout="wide")
+# Page configurations
+st.set_page_config(
+    layout="wide", # using the entire width of the browser
+    page_title="FAF Food Flows Dashboard" # the title of the browser tab
+    )
 
 # apply custom css to remove margins and make the map full-screen
 st.markdown(
     """
     <style>
+        #MainMenu { visibility: hidden; }
+        footer { visibility: hidden; }
+        header { visibility: hidden; }
         .block-container { padding: 0; margin: 0; }
         .st-emotion-cache-1y4p8pa { padding: 0; }
     </style>
@@ -58,6 +64,12 @@ col1, col2 = st.columns([1, 4])
 
 with col1:
     st.markdown("### Settings")
+    sctg_file = st.selectbox(
+        "Select Food Category",
+        options=["Live Animals", "Cereal Grains", "Animal Feed"]
+
+    )
+
     selected_faf_zone = st.selectbox(
         "Select FAF Zone",
         options=sctg_2_1['dms_orig'].unique()
@@ -68,6 +80,8 @@ with col1:
         options=["TripsLayer", "ArcLayer"],
         index=0
     )
+    
+    st.write(f"Displaying **{selected_layer}** for trips originating from FAF Zone: `{selected_faf_zone}`")
 
 # filter the dataset based on the selected faf zone
 filtered_df = sctg_2_1[sctg_2_1['dms_orig'] == selected_faf_zone]
@@ -90,6 +104,7 @@ if selected_layer == "TripsLayer":
         current_time=2,
         get_tooltip="[orig_dms, dest_dms]"
     )
+    
 else:
     layer = pdk.Layer(
         "ArcLayer",
@@ -111,5 +126,3 @@ view_state = pdk.ViewState(
 # render the map in the second column (full screen minus settings)
 with col2:
     st.pydeck_chart(pdk.Deck(layers=[layer], initial_view_state=view_state), use_container_width=True, height=900)
-
-st.write(f"Displaying {selected_layer} for trips originating from FAF Zone: {selected_faf_zone}")

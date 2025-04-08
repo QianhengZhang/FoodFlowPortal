@@ -1,5 +1,7 @@
 # Virtual environment
 venv/
+api_key.txt
+TO DO.txt
 
 # Python bytecode
 *.pyc
