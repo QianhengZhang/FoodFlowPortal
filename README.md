@@ -1,4 +1,4 @@
-FAF Food Flows Dashboard
+# FAF Food Flows Dashboard
 
 This Streamlit app visualizes food commodity flows across the U.S. using FAF (Freight Analysis Framework) data. You can explore movements of categories like grains, meat, live animals, and more—zone by zone.
 
@@ -13,12 +13,16 @@ How to Set Up
    cd Food-Flow-Project
 
 2. **Create a virtual environment**
+    ```bash
     python -m venv venv
     source venv/bin/activate  # On Windows: venv\Scripts\activate
 
-3. **Install the required packages**
+4. **Install the required packages**
+   ```bash
     pip install -r requirements.txt
 
-4. **Run the app**
+6. **Run the app**
+    ```bash
     streamlit run app.py
+   ```
     Open your browser to http://localhost:8501 if it doesn’t launch automatically.
