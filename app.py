@@ -6,7 +6,6 @@ import json
 
 st.set_page_config(layout="wide", page_title="FAF Food Flows Dashboard")
 
-# Custom CSS to go fullscreen
 st.markdown("""
 <style>
     #MainMenu { visibility: hidden; }
@@ -136,7 +135,7 @@ view_state = pdk.ViewState(latitude=39.8283, longitude=-98.5795, zoom=4, bearing
 with col2:
     st.pydeck_chart(
         pdk.Deck(
-            layers=[boundary_layer, layer],  # You could switch this to [boundary_layer, layer] if needed
+            layers=[boundary_layer, layer], 
             initial_view_state=view_state,
             tooltip=tooltip
         ),
